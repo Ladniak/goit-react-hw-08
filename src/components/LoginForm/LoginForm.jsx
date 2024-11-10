@@ -1,25 +1,30 @@
 import module from "./LoginForm.module.css"
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useDispatch } from "react-redux";
 import * as Yup from 'yup';
+import { login } from "../../redux/auth/operations";
+
+const INITIAL_VALUES = {
+    email: '',
+    password: '',
+};
+
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email("Неправильний формат електронної пошти")
+        .required("Електронна пошта є обов'язковим полем"),
+    password: Yup.string()
+        .min(6, "Пароль повинен бути не менше 6 символів")
+        .required("Пароль є обов'язковим полем"),
+});
 
 const LoginForm = () => {
-    const INITIAL_VALUES = {
-        email: '',
-        password: '',
-    };
 
-    const validationSchema = Yup.object({
-        email: Yup.string()
-            .email("Неправильний формат електронної пошти")
-            .required("Електронна пошта є обов'язковим полем"),
-        password: Yup.string()
-            .min(6, "Пароль повинен бути не менше 6 символів")
-            .required("Пароль є обов'язковим полем"),
-    });
+    const dispatch = useDispatch();
 
     const handleSubmit = (values, actions) => {
-        console.log(values);
+        dispatch(login(values));
         actions.resetForm();
     };
 
@@ -34,7 +39,7 @@ const LoginForm = () => {
                 <Form className={module.form}>
                     <label className={module.formLabel}>
                         Електронна пошта:
-                        <Field type="email" name="email" />
+                        <Field type="text" name="email" />
                         <ErrorMessage name="email" component="span" />
                     </label>
                     <label className={module.formLabel}>

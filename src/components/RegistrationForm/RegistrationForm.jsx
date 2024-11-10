@@ -1,29 +1,34 @@
 import module from "./RegistrationForm.module.css"
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useDispatch } from "react-redux";
 import * as Yup from 'yup';
+import { register } from "../../redux/auth/operations";
+
+const INITIAL_VALUES = {
+    name: '',
+    email: '',
+    password: '',
+};
+
+const validationSchema = Yup.object({
+    name: Yup.string()
+        .min(2, "Ім'я повинно бути не менше 2-х символів")
+        .required("Ім'я є обов'язковим полем"),
+    email: Yup.string()
+        .email("Неправильний формат електронної пошти")
+        .required("Електронна пошта є обов'язковим полем"),
+    password: Yup.string()
+        .min(6, "Пароль повинен бути не менше 6 символів")
+        .required("Пароль є обов'язковим полем"),
+});
 
 const RegistrationForm = () => {
-    const INITIAL_VALUES = {
-        name: '',
-        email: '',
-        password: '',
-    };
-
-    const validationSchema = Yup.object({
-        name: Yup.string()
-            .min(2, "Ім'я повинно бути не менше 2-х символів")
-            .required("Ім'я є обов'язковим полем"),
-        email: Yup.string()
-            .email("Неправильний формат електронної пошти")
-            .required("Електронна пошта є обов'язковим полем"),
-        password: Yup.string()
-            .min(6, "Пароль повинен бути не менше 6 символів")
-            .required("Пароль є обов'язковим полем"),
-    });
+    const dispatch = useDispatch();
 
     const handleSubmit = (values, actions) => {
         console.log(values);
+        dispatch(register(values));
         actions.resetForm();
     };
 
@@ -43,7 +48,7 @@ const RegistrationForm = () => {
                     </label>
                     <label className={module.formLabel}>
                         Email:
-                        <Field type="email" name="email" />
+                        <Field type="text" name="email" />
                         <ErrorMessage name="email" component="span" />
                     </label>
                     <label className={module.formLabel}>
