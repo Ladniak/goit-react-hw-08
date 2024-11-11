@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   items: null,
   loading: false,
   error: null,
+  message: false,
 };
 
 const contactsSlice = createSlice({
@@ -29,10 +30,12 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.message = false;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        state.message = true;
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
         );
@@ -45,10 +48,12 @@ const contactsSlice = createSlice({
       .addCase(addContact.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.message = false;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        state.message = true;
         state.items = [...state.items, action.payload];
       })
       .addCase(addContact.rejected, (state, action) => {

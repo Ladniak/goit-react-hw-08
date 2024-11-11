@@ -12,11 +12,11 @@ const INITIAL_VALUES = {
 
 const validationSchema = Yup.object({
     email: Yup.string()
-        .email("Неправильний формат електронної пошти")
-        .required("Електронна пошта є обов'язковим полем"),
+        .email("Email format is incorrect")
+        .required("Email is a required field"),
     password: Yup.string()
-        .min(6, "Пароль повинен бути не менше 6 символів")
-        .required("Пароль є обов'язковим полем"),
+        .min(6, "The password is too short")
+        .required("Password is a required field"),
 });
 
 const LoginForm = () => {
@@ -30,7 +30,8 @@ const LoginForm = () => {
 
     return (
         <div className={module.formDiv}>
-            <h1>Увійти</h1>
+            <h1 className={module.formHeader}>Log in</h1>
+            <p>Log in to continue</p>
             <Formik
                 initialValues={INITIAL_VALUES}
                 validationSchema={validationSchema}
@@ -38,16 +39,14 @@ const LoginForm = () => {
             >
                 <Form className={module.form}>
                     <label className={module.formLabel}>
-                        Електронна пошта:
-                        <Field type="text" name="email" />
-                        <ErrorMessage name="email" component="span" />
+                        <Field placeholder="Name" className={module.input} type="text" name="email" />
+                        <ErrorMessage className={module.error} name="email" component="span" />
                     </label>
                     <label className={module.formLabel}>
-                        Пароль:
-                        <Field type="password" name="password" />
-                        <ErrorMessage name="password" component="span" />
+                        <Field placeholder="Password" className={module.input} type="password" name="password" />
+                        <ErrorMessage className={module.error} name="password" component="span" />
                     </label>
-                    <button type="submit">Увійти</button>
+                    <button className={module.formButton} type="submit">Log in</button>
                 </Form>
             </Formik>
         </div>

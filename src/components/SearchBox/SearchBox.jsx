@@ -14,8 +14,8 @@ const SearchBox = () => {
 
     return (
         <label className={module.label}>
-            <span>Find contacts by name</span>
-            <input value={filter} className={module.input} type="text" name="name" onChange={handleChange} />
+            {/* <span>Find contacts by name</span> */}
+            <input placeholder="Find contact" value={filter} className={module.input} type="text" name="name" onChange={handleChange} />
         </label>
     )
 }

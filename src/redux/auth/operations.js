@@ -73,7 +73,3 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
-// password: 243453645
-// email: sergeyladnyak@gmail.com
-// Serhii Ladniak

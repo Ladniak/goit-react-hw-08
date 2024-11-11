@@ -10,7 +10,7 @@ export const Navigation = () => {
     const isLoggedIn = useSelector(selectUserDataIsLoggedIn);
 
     return (
-        <div>
+        <div className={module.navigation}>
             <NavLink className={buildCssClasses} to="/">Home</NavLink>
             {isLoggedIn && (
                 <NavLink className={buildCssClasses} to="/contacts">Contacts</NavLink>

@@ -13,14 +13,14 @@ const INITIAL_VALUES = {
 
 const validationSchema = Yup.object({
     name: Yup.string()
-        .min(2, "Ім'я повинно бути не менше 2-х символів")
-        .required("Ім'я є обов'язковим полем"),
+        .min(2, "The name is too short")
+        .required("Name is a required field"),
     email: Yup.string()
-        .email("Неправильний формат електронної пошти")
-        .required("Електронна пошта є обов'язковим полем"),
+        .email("Email format is incorrect")
+        .required("Email is a required field"),
     password: Yup.string()
-        .min(6, "Пароль повинен бути не менше 6 символів")
-        .required("Пароль є обов'язковим полем"),
+        .min(6, "The password is too short")
+        .required("Password is a required field"),
 });
 
 const RegistrationForm = () => {
@@ -34,7 +34,8 @@ const RegistrationForm = () => {
 
     return (
         <div className={module.formDiv}>
-            <h1>Реєстрація</h1>
+            <h1 className={module.formHeader}>Sign Up</h1>
+            <p>Sign up to continue</p>
             <Formik
                 initialValues={INITIAL_VALUES}
                 validationSchema={validationSchema}
@@ -42,21 +43,18 @@ const RegistrationForm = () => {
             >
                 <Form className={module.form}>
                     <label className={module.formLabel}>
-                        Name:
-                        <Field type="name" name="name" />
-                        <ErrorMessage name="name" component="span" />
+                        <Field placeholder="Name" className={module.input} type="name" name="name" />
+                        <ErrorMessage className={module.error} name="name" component="span" />
                     </label>
                     <label className={module.formLabel}>
-                        Email:
-                        <Field type="text" name="email" />
-                        <ErrorMessage name="email" component="span" />
+                        <Field placeholder="Email" className={module.input} type="text" name="email" />
+                        <ErrorMessage className={module.error} name="email" component="span" />
                     </label>
                     <label className={module.formLabel}>
-                        Password:
-                        <Field type="password" name="password" />
-                        <ErrorMessage name="password" component="span" />
+                        <Field placeholder="Password" className={module.input} type="password" name="password" />
+                        <ErrorMessage className={module.error} name="password" component="span" />
                     </label>
-                    <button type="submit">Sign up</button>
+                    <button className={module.formButton} type="submit">Sign up</button>
                 </Form>
             </Formik>
         </div>

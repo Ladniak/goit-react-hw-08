@@ -29,21 +29,23 @@ const ContactForm = () => {
     }
 
     return (
-        <Formik initialValues={INITIAL_VALUES} validationSchema={AddContactFormShema} onSubmit={handleSubmit}>
-            <Form className={module.form}>
-                <label className={module.label}>
-                    <span className={module.span}>Name</span>
-                    <Field type="text" name="name" className={module.field} />
-                    <ErrorMessage className={module.error} name="name" component="span" />
-                </label>
-                <label className={module.label}>
-                    <span className={module.span}>Number</span>
-                    <Field type="text" name="number" className={module.field} />
-                    <ErrorMessage className={module.error} name="number" component="span" />
-                </label>
-                <button type="submit" className={module.btn}>Add contact</button>
-            </Form>
-        </Formik>
+        <div className={module.formDiv}>
+            <h3>New contact</h3>
+            <Formik initialValues={INITIAL_VALUES} validationSchema={AddContactFormShema} onSubmit={handleSubmit}>
+                <Form className={module.form}>
+                    <label className={module.label}>
+                        <Field placeholder="Name" type="text" name="name" className={module.field} />
+                        <ErrorMessage className={module.error} name="name" component="span" />
+                    </label>
+                    <label className={module.label}>
+                        <Field placeholder="Number" type="text" name="number" className={module.field} />
+                        <ErrorMessage className={module.error} name="number" component="span" />
+                    </label>
+                    <button type="submit" className={module.btn}>Add contact</button>
+                </Form>
+            </Formik>
+        </div>
+
     )
 }
 
