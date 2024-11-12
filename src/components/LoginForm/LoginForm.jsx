@@ -39,7 +39,7 @@ const LoginForm = () => {
             >
                 <Form className={module.form}>
                     <label className={module.formLabel}>
-                        <Field placeholder="Name" className={module.input} type="text" name="email" />
+                        <Field placeholder="Email" className={module.input} type="text" name="email" />
                         <ErrorMessage className={module.error} name="email" component="span" />
                     </label>
                     <label className={module.formLabel}>
